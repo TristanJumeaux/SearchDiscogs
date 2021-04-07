@@ -27,11 +27,22 @@ def get_sellers(parsed_sellers):
             if index == 0:
                 names.append(attribute.get_text())
                 index+=1
-    return names
+    return list(set(names))
 
 def generate_link(ref:str) -> str : 
     print("https://discogs.com/fr/sell/release/{}?ev=rb".format(ref))
     return "https://discogs.com/fr/sell/release/{}?ev=rb".format(ref)
+
+def find_most_common_seller(list_seller_ref):
+    sellers = {}
+    for ref in list_seller_ref:
+         for seller in ref:
+             if seller not in sellers:
+                 sellers[seller]= 1
+             else:
+                 sellers[seller]+= 1
+    
+    return dict(sorted(sellers.items(), key=lambda item: item[1], reverse=True))
 
 
 def main(ref1="",ref2="",ref3=""):
@@ -41,7 +52,8 @@ def main(ref1="",ref2="",ref3=""):
     refs = [ref1,ref2,ref3]
     links = [generate_link(ref) for ref in refs]
     results = [scrap_web_page(link) for link in links]
-    print(results)
+    sellers = find_most_common_seller(results)
+    print(sellers)
     return results
 
 main("4485099","10949522","4468030")

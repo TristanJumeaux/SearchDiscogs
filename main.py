@@ -9,8 +9,12 @@ def identify():
 def get_wantlist(d):
     return d.identity().wantlist
 
-def get_release(d,release):
-    return d.release(release)
+def get_release_dict(d,refs):
+    releases = {}
+    for ref in refs:
+        release_request = d.release(ref)
+        releases[ref] = ref + " - " + release_request.artists[0].name + " - " + release_request.title
+    return releases
 
 def scrap_web_page(link: str):
     r = requests.get(link)
@@ -29,32 +33,62 @@ def get_sellers(parsed_sellers):
                 index+=1
     return list(set(names))
 
-def generate_link(ref:str) -> str : 
-    print("https://discogs.com/fr/sell/release/{}?ev=rb".format(ref))
+def generate_link(ref:str) -> str :
     return "https://discogs.com/fr/sell/release/{}?ev=rb".format(ref)
 
-def find_most_common_seller(list_seller_ref):
+def find_most_common_seller(list_seller_ref,ref_tab):
     sellers = {}
+    index=0
     for ref in list_seller_ref:
          for seller in ref:
              if seller not in sellers:
-                 sellers[seller]= 1
+                 sellers[seller]=[ref_tab[index]]
              else:
-                 sellers[seller]+= 1
-    
-    return dict(sorted(sellers.items(), key=lambda item: item[1], reverse=True))
+                 sellers[seller].append(ref_tab[index])
+         index+=1
+    return dict(sorted(sellers.items(), key=lambda item: len(item[1]), reverse=True))
 
+def transform_results(seller_ref,release_dict):
+    for key in seller_ref:
+        new_value = []
+        for value in seller_ref[key]:
+            new_value.append(release_dict[value])
+        seller_ref[key]=new_value
+    return seller_ref
+
+def display_result(tab_result):
+
+    top_results = [[k] + tab_result[k] for k in list(tab_result.keys())[:10]]
+    index=0
+    for result in top_results:
+        index+=1
+        print(str(index)+": "+result[0]+" is selling : "+ ' and '.join(result[1:]))
 
 def main(ref1="",ref2="",ref3=""):
 
     d = identify()
 
     refs = [ref1,ref2,ref3]
+
+    # Get information about release numbers, faire un dictionnaire pour quand on aura un tab pouvoir inclure les infos
+    release_dict = get_release_dict(d,refs)
+
+    # Generate links to scrap for releases
     links = [generate_link(ref) for ref in refs]
+
+    # Scrap the links
     results = [scrap_web_page(link) for link in links]
-    sellers = find_most_common_seller(results)
-    print(sellers)
-    return results
+
+    # Find common vendors between links
+    sellers = find_most_common_seller(results,refs)
+
+    # Add release informations like artists or title
+    release_results = transform_results(sellers,release_dict)
+
+    # Display results
+    display_result(release_results)
+    
+    return release_dict
 
 main("4485099","10949522","4468030")
 

@@ -4,7 +4,7 @@ from typing import List
 import requests
 
 def identify():
-    return discogs_client.Client("TestRequests",user_token="urhZlLQUyxkJEEigCxyTzvfIyIhWufqurtodSgwJ")
+    return discogs_client.Client("TestRequests",user_token="")
 
 def get_wantlist(d):
     return d.identity().wantlist
@@ -87,7 +87,7 @@ def main(ref1="",ref2="",ref3=""):
 
     # Display results
     display_result(release_results)
-    
+
     return release_dict
 
 main("4485099","10949522","4468030")

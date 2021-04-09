@@ -15,10 +15,12 @@ This repository is here to create this possibility!
 
 For now here is how it works : 
 
-* First way : on discogs, get the references of the records your searching for. Then, launch _py main.py ref1 ref2 ref3_ and you'll see the most common sellers as a result.
-* Second way : on discogs, get your developer token. Then, launch _py get_wantlist.py token_, it will generate a CSV file with your wantlist. Now, by executing _py get_reference.py "Miles Davis Kind of Blue" "Michael Jackson Thriller"_ you will find out directly the references. Eventually, you will be able to run  _py main.py ref1 ref2 ref3_.
+* First way : on discogs,  get your developer token* and get the references of the records your searching for. Then, launch _py main.py token ref1 ref2 ref3_ and you'll see the most common sellers as a result.
+* Second way : on discogs, get your developer token. Then, launch _py get_wantlist.py token_, it will generate a CSV file with your wantlist. Now, by executing _py get_reference.py "Miles Davis Kind of Blue" "Michael Jackson Thriller"_ you will find out directly the references. Eventually, you will be able to run  _py main.py token ref1 ref2 ref3_.
 
 After doing so, you will in your shell the sellers that you could deal with ! 
+
+_**To get your developer token, go to the developer settings of your account on the Discogs website._
 
 # To Do
 
@@ -27,5 +29,8 @@ For now the main points are:
 
     - Add a cli parameter __wantlist__ or __ref__ > make it possible to run main.py directly with record names
     - ? We'll find more !
+
+
+
 
 

@@ -1,11 +1,31 @@
 # SearchDiscogs
 Creating a new way to make a research in Discogs.
 
+# Concept
+I have always been frustrated about Discogs missing an important feature to me : the ability to make a search on several records at the same time.
+
+Here is the concrete problem : 
+
+* I want to find a seller that offers the record _Miles Davis - Kind of Blue_ : __Possible__
+* I want to find a seller that offers the record _Miles Davis - Kind of Blue_ but __also__ _Michael Jackson - Thriller_ : __Impossible__
+
+This repository is here to create this possibility!
+
+# Currently working
+
+For now here is how it works : 
+
+* First way : on discogs, get the references of the records your searching for. Then, launch _py main.py ref1 ref2 ref3_ and you'll see the most common sellers as a result.
+* Second way : on discogs, get your developer token. Then, launch _py get_wantlist.py token_, it will generate a CSV file with your wantlist. Now, by executing _py get_reference.py "Miles Davis Kind of Blue" "Michael Jackson Thriller"_ you will find out directly the references. Eventually, you will be able to run  _py main.py ref1 ref2 ref3_.
+
+After doing so, you will in your shell the sellers that you could deal with ! 
+
 # To Do
 
-- Create a connection function
-- Create a script that takes reference in command line parameters
-- Scrap web pages of references and get vendor names for VG+, NM and M records
-- Find the seller with higher number of references and retrieve it to the user with details
+There are still many things to do ! 
+For now the main points are:  
+
+    - Add a cli parameter __wantlist__ or __ref__ > make it possible to run main.py directly with record names
+    - ? We'll find more !
 
 

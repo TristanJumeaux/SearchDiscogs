@@ -21,7 +21,7 @@ For now here is how it works :
 After doing so, you will in your shell the sellers that you could deal with ! 
 
 _**To get your developer token, go to the developer settings of your account on the Discogs website._<br/>
-_**To get reference, go to a discogs page and look at the top right. You'll find something like r23456. Just keep the numbers! For example, [here](https://www.discogs.com/fr/Miles-Davis-Kind-Of-Blue/release/8359573) the ref is 8359573._
+_**To get your references, go to your record page and look at the top right. You'll find something like r23456. Just keep the numbers! For example, [here](https://www.discogs.com/fr/Miles-Davis-Kind-Of-Blue/release/8359573) the ref is 8359573._
 # To Do
 
 There are still many things to do ! 

@@ -5,7 +5,7 @@ import requests
 import sys
 
 def identify(token):
-    return discogs_client.Client("TestRequests",user_token=token)
+    return discogs_client.Client("Get common sellers",user_token=token)
 
 def get_wantlist(d):
     return d.identity().wantlist
@@ -64,32 +64,6 @@ def display_result(tab_result):
     for result in top_results:
         index+=1
         print("\n--- " + str(index)+": "+result[0]+" is selling "+str(len(result[1:]))+" of the records : \n"+ '\n'.join(result[1:]))
-
-# def main(ref1="",ref2="",ref3=""):
-
-#     d = identify()
-
-#     refs = [ref1,ref2,ref3]
-
-#     # Get information about release numbers, faire un dictionnaire pour quand on aura un tab pouvoir inclure les infos
-#     release_dict = get_release_dict(d,refs)
-
-#     # Generate links to scrap for releases
-#     links = [generate_link(ref) for ref in refs]
-
-#     # Scrap the links
-#     results = [scrap_web_page(link) for link in links]
-
-#     # Find common vendors between links
-#     sellers = find_most_common_seller(results,refs)
-
-#     # Add release informations like artists or title
-#     release_results = transform_results(sellers,release_dict)
-
-#     # Display results
-#     display_result(release_results)
-    
-#     return release_dict
 
 if __name__ == "__main__":
 
